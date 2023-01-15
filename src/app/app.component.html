@@ -1,2 +1,3 @@
-<app-header></app-header>
+<app-header (menu)="menu=true"></app-header>
 <app-dashboard></app-dashboard>
+<app-menu *ngIf="menu" (close)="menu=false"></app-menu>
