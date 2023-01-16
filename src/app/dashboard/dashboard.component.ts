@@ -10,6 +10,7 @@ export class DashboardComponent {
   html:any=undefined;
   element:any=undefined;
   inspect:any=undefined;
+  tab="Design";
 
 
 }
