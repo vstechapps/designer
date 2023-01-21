@@ -7,6 +7,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { MenuComponent } from './menu/menu.component';
+import { CodeComponent } from './code/code.component';
+import { PreviewComponent } from './preview/preview.component';
+import { NodeComponent } from './node/node.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { MenuComponent } from './menu/menu.component';
     DashboardComponent,
     HeaderComponent,
     TabsComponent,
-    MenuComponent
+    MenuComponent,
+    CodeComponent,
+    PreviewComponent,
+    NodeComponent
   ],
   imports: [
     BrowserModule,

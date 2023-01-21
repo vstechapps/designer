@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Node } from './app.models';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   menu:boolean=false;
+  design?:Node;
+  current?:Node;
+
 }

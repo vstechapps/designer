@@ -1,0 +1,11 @@
+<div class="row" *ngIf="node && node.tag">
+    <div class="col-12">
+        <i class="material-icons mx-2" *ngIf="node.children.length>0" (click)="expand=!expand">{{expand?"expand_more":"chevron_right"}}</i>
+        <span>{{node.tag}}</span>
+    </div>
+    <div class="col-12" *ngIf="expand">
+        <div *ngFor="let c of node.children">
+            <app-node [node]="c"></app-node>
+        </div>
+    </div>
+</div>
