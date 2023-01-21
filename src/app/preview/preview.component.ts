@@ -14,6 +14,7 @@ export class PreviewComponent implements OnInit {
   html: string = "";
 
   ngOnInit() {
+    console.log("Rendering Preview ...")
     this.html = this.process(this.design);
   }
 

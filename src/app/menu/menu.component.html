@@ -24,7 +24,7 @@
             <i class="material-icons text-light pointer mt-4" (click)="action.emit('delete')">delete</i>
         </div>
         <div>
-            <i class="material-icons text-light pointer mt-4" (click)="action.emit('preview')">preview</i>
+            <i class="material-icons pointer mt-4" [ngClass]="preview?'text-warning':'text-light'" (click)="action.emit('preview')">preview</i>
         </div>
     </div>
 </div>

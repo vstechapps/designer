@@ -1,4 +1,4 @@
 <app-header (menu)="menu=true"></app-header>
-<app-menu *ngIf="menu" (close)="menu=false"></app-menu>
-<app-code *ngIf="!preview" [design]="design"></app-code>
-<app-preview *ngIf="!preview" [design]="design"></app-preview>
+<app-menu *ngIf="menu" (close)="menu=false" (action)="perform($event)"></app-menu>
+<app-node *ngIf="design && !preview" [node]="design"></app-node>
+<app-preview *ngIf="preview" [design]="design"></app-preview>
