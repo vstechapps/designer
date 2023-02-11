@@ -24,5 +24,4 @@ export interface Dialog{
 export interface Option{
   text:string;
   action:string;
-  type:string;
 }
