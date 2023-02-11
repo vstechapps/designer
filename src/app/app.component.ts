@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Node, TAG } from './app.models';
+import { Dialog } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +12,19 @@ export class AppComponent {
   design?:Node;
   current?:Node;
   preview:boolean=false;
+  dialog?:Dialog;
 
 
   perform(action:string){
-    console.log("Action: "+action);
-    if(action=="add"){
-      this.design={id:"div",tag:TAG.DIV,children:[],attributes: new Map<string,string>()}
+    let actions:string[]  = action.split("_");
+    console.log("Actions: "+actions);
+    if(actions.length==0)return;
+    if(actions[0]=="add"){
+      if(actions.length==1) this.dialog={action:"add",title:"",options:[]}
+      
     }
     if(action=="preview"){
       this.preview=!this.preview;
     }
   }
-
 }

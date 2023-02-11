@@ -1,0 +1,10 @@
+<div class="d-container" *ngIf="dailog">
+    <div class="dialog">
+        <div class="title">
+            <h2>{{dialog.title}}</h2>
+        </div>
+        <div class="content">
+            <button *ngFor="let o of dialog.options" (click)="action.emit(o.action)">{{o.text}}</button>
+        </div>
+    </div>
+</div>
