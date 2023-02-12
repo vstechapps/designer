@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Node, TAG } from './app.models';
+import { Node, NodeUtil, TAG } from './app.models';
 import { Dialog } from './dialog/dialog.component';
 
 @Component({
@@ -22,15 +22,29 @@ export class AppComponent {
     if(action=="preview"){
       this.preview=!this.preview;
     }
+    if(action=="close_dialog"){
+      this.dialog=undefined;
+    }
+    if(action.indexOf("add_element_")>-1){
+      let t=action.replace("add_element_","");
+      if(this.current==undefined){
+        this.current=NodeUtil.create(t);
+        this.design=this.current;
+      }
+      else{
+        this.current=NodeUtil.add(this.current,t);
+      }
+    }
+    console.log("Design",this.design);
   }
 }
 
 export const DialogOptions:any={
-  "add":[{action:"add",Title:"Add",options:[
+  "add":{action:"add",title:"Add",options:[
     {text:"Element",action:"add_element"},
     {text:"Attribute",action:"add_attribute"}
-  ]}],
-  "add_element":[{action:"add_element",Title:"Add Element",options:[
+  ]},
+  "add_element":{action:"add_element",title:"Add Element",options:[
     {text:"Div",action:"add_element_div"},
     {text:"Span",action:"add_element_p"},
     {text:"Button",action:"add_element_button"},
@@ -38,5 +52,5 @@ export const DialogOptions:any={
     {text:"Paragraph",action:"add_element_p"},
     {text:"Image",action:"add_element_img"},
     {text:"Video",action:"add_element_video"}
-  ]}]
+  ]}
 }
