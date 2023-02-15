@@ -4,7 +4,8 @@ export interface Node{
     id:string,
     tag:TAG|string,
     attributes:Map<string,string>,
-    children:Node[]
+    children:Node[],
+    text?:string
   }
 
   export class NodeUtil{
@@ -38,3 +39,28 @@ export interface Node{
   export const isEmptyElement=function(e:string){
     return e!=null && emptyElems.indexOf(e.toLowerCase()) !== -1;
   }
+
+  
+export interface Form{
+  name:string;
+  title:string;
+  controls:Control[];
+  actions:Action[];
+}
+
+
+export interface Control{
+  id:string;
+  name?:string;
+  type:string;
+  label?:string;
+  placeholder?:string;
+  text?:string;
+  values?:string[];
+  value:string;
+}
+
+export interface Action{
+  text:string;
+  action:string;
+}

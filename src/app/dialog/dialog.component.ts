@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Action, Form } from '../app.models';
 
 @Component({
   selector: 'app-dialog',
@@ -8,7 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class DialogComponent {
 
   @Input()
-  dialog?: Dialog;
+  dialog?:Dialog;
 
   @Output()
   action:EventEmitter<string> = new EventEmitter<string>();
@@ -16,12 +17,8 @@ export class DialogComponent {
 }
 
 export interface Dialog{
-  action:string;
-  title:string;
-  options:Option[];
-}
-
-export interface Option{
-  text:string;
-  action:string;
+  form?:Form;
+  action?:string;
+  title?:string;
+  actions?:Action[];
 }

@@ -11,6 +11,7 @@ import { CodeComponent } from './code/code.component';
 import { PreviewComponent } from './preview/preview.component';
 import { NodeComponent } from './node/node.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { FormComponent } from './form/form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DialogComponent } from './dialog/dialog.component';
     CodeComponent,
     PreviewComponent,
     NodeComponent,
-    DialogComponent
+    DialogComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,

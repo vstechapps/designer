@@ -1,0 +1,18 @@
+<form *ngIf="form">
+    <div class="m-3" *ngFor="let control of form.controls">
+        <div *ngIf="['text','email','password','number'].indexOf(control.type)>-1">
+            <label [for]="control.id" class="form-label" *ngIf="control.label" >{{control.label}}</label>
+            <input [type]="control.type" class="form-control" [value]="control.value" [id]="control.id" [placeholder]="control.placeholder" [name]="control.name">
+        </div>
+        <div *ngIf="control.type=='select'">
+            <label [for]="control.id" class="form-label" *ngIf="control.label" >{{control.label}}</label>
+            <select class="form-select" [value]="control.value">
+                <option *ngIf="let v of control.values">{{v}}</option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-primary m-2" *ngFor="let o of form.actions"
+                    (click)="submit.emit(o.action)">{{o.text}}</button>
+    </div>
+</form>
