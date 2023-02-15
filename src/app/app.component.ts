@@ -15,6 +15,10 @@ export class AppComponent {
   preview:boolean=false;
   dialog?:Dialog;
 
+  select(node:Node){
+    console.log(node);
+    this.current = node;
+  }
 
   perform(action:string){
     if(DialogActions[action]!=null){

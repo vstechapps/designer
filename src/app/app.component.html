@@ -1,5 +1,5 @@
 <app-header (menu)="menu=true"></app-header>
 <app-menu *ngIf="menu" (close)="menu=false" (action)="perform($event)"></app-menu>
-<app-node *ngIf="design && !preview" [node]="design"></app-node>
+<app-node *ngIf="design && !preview" [node]="design" class="node" (select)="select($event)" [current]="current"></app-node>
 <app-preview *ngIf="preview" [design]="design"></app-preview>
 <app-dialog [dialog]="dialog" (action)="perform($event)"></app-dialog>
