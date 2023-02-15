@@ -39,8 +39,10 @@ export class AppComponent {
       else{
         NodeUtil.add(this.current,t);
       }
+      this.perform("close_dialog");
     }
     console.log("Design",this.design);
+    
   }
 }
 
