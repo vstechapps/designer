@@ -37,7 +37,7 @@ export class AppComponent {
         this.design=this.current;
       }
       else{
-        this.current=NodeUtil.add(this.current,t);
+        NodeUtil.add(this.current,t);
       }
     }
     console.log("Design",this.design);
