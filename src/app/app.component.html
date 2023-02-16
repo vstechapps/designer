@@ -1,10 +1,10 @@
 <app-header (menu)="menu=true"></app-header>
 <app-menu *ngIf="menu" (close)="menu=false" (action)="perform($event)"></app-menu>
 <div class="node-preview row">
-    <div class="col-6 node">
+    <div class="col-12 col-md-6 node">
         <app-node *ngIf="design" [node]="design" (select)="select($event)" [current]="current"></app-node>
     </div>
-    <div class="col-6 node">
+    <div class="col-12 col-md-6 node">
         <app-preview *ngIf="preview" [design]="design"></app-preview>
     </div>
 </div>
