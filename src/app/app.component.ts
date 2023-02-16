@@ -9,7 +9,7 @@ import { Dialog } from './dialog/dialog.component';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  menu:boolean=false;
+  menu:boolean=true;
   design?:Node;
   current?:Node;
   preview:boolean=false;
