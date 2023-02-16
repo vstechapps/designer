@@ -24,5 +24,11 @@
         <div>
             <i class="material-icons pointer mt-4" [ngClass]="preview?'text-warning':'text-light'" (click)="action.emit('preview')">preview</i>
         </div>
+        <div>
+            <i class="material-icons pointer mt-4" [ngClass]="preview?'text-warning':'text-light'" (click)="action.emit('upload')">upload</i>
+        </div>
+        <div>
+            <i class="material-icons pointer mt-4" [ngClass]="preview?'text-warning':'text-light'" (click)="action.emit('download')">download</i>
+        </div>
     </div>
 </div>
