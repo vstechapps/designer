@@ -19,6 +19,7 @@ export class PreviewComponent implements OnInit {
   }
 
   process(node?: Node): string {
+    console.log("Processing ",node);
     let text: string = "";
     if (node) {
       let isEmpty: boolean = isEmptyElement(node.tag);
@@ -31,13 +32,16 @@ export class PreviewComponent implements OnInit {
         text = "<" + node.tag + attributeText + "/>";
       } else {
         let childText = "";
-        for (let c of node.children) {
-          childText += this.process(c) + "\n";
+        if(node.text){
+          childText += node.text;
         }
-        childText = childText == "" ? childText : "\n" + childText;
+        for (let c of node.children) {
+          childText += this.process(c);
+        }
         text = "<" + node.tag + attributeText + ">" + childText + "</" + node.tag + ">";
       }
     }
+    console.log(text);
     return text;
   }
 

@@ -41,6 +41,13 @@ export class AppComponent {
       }
       this.perform("close_dialog");
     }
+    if(action.indexOf("add_text_")>-1){
+      if(this.current){
+        this.current.text=this.dialog?.form?.controls[0].value;
+      }
+      console.log("Form",this.dialog?.form);
+      this.perform("close_dialog");
+    }
     console.log("Design",this.design);
     
   }
@@ -63,7 +70,7 @@ export const DialogActions:any={
   ]},
   "add_text":{action:"add_text",title:"Add Text",form:{
     title:"Add Text",
-    controls:[{id:"addtext",type:"text",placeholder:"Enter text here.."}],
+    controls:[{id:"addtext",type:"text",placeholder:"Enter text here..",value:''}],
     actions:[{text:"Add",action:"add_text_"}]
   }}
 }

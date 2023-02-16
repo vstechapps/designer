@@ -2,7 +2,7 @@
     <div class="m-3" *ngFor="let control of form.controls">
         <div *ngIf="['text','email','password','number'].indexOf(control.type)>-1">
             <label [for]="control.id" class="form-label" *ngIf="control.label" >{{control.label}}</label>
-            <input [type]="control.type" class="form-control" [value]="control.value" [id]="control.id" [placeholder]="control.placeholder" [name]="control.name">
+            <input [type]="control.type" class="form-control" [value]="control.value" (change)="update(control,$event)" [id]="control.id" [placeholder]="control.placeholder" [name]="control.name">
         </div>
         <div *ngIf="control.type=='select'">
             <label [for]="control.id" class="form-label" *ngIf="control.label" >{{control.label}}</label>

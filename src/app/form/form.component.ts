@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Form } from '../app.models';
+import { Control, Form } from '../app.models';
 
 @Component({
   selector: 'app-form',
@@ -13,5 +13,10 @@ export class FormComponent {
   
   @Output()
   submit:EventEmitter<string> = new EventEmitter();
+
+  update(c:Control,e:any) {
+    c.value = e.target.value;
+    
+  }
 
 }
