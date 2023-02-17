@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit } from '@angular/core';
 import { isEmptyElement, Node } from '../app.models';
 
 @Component({
@@ -6,7 +6,7 @@ import { isEmptyElement, Node } from '../app.models';
   templateUrl: './preview.component.html',
   styleUrls: ['./preview.component.less']
 })
-export class PreviewComponent implements OnInit {
+export class PreviewComponent implements OnInit, OnChanges {
 
   @Input()
   design?: Node;
@@ -14,6 +14,11 @@ export class PreviewComponent implements OnInit {
   html: string = "";
 
   ngOnInit() {
+    console.log("Rendering Preview ...")
+    this.html = this.process(this.design);
+  }
+
+  ngOnChanges(){
     console.log("Rendering Preview ...")
     this.html = this.process(this.design);
   }

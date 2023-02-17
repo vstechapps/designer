@@ -13,15 +13,8 @@ export class MenuComponent implements OnInit{
   @Output()
   action:EventEmitter<string> = new EventEmitter();
 
-  preview:boolean=false;
-
   
   ngOnInit(): void {
-    this.action.subscribe(event=>{
-      if(event=="preview"){
-        this.preview=!this.preview;
-      }
-    });
   }
 
   

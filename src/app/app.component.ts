@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { Node, NodeUtil, TAG, Form, Control } from './app.models';
 import { Dialog } from './dialog/dialog.component';
 
@@ -12,7 +12,6 @@ export class AppComponent {
   menu:boolean=true;
   design?:Node;
   current?:Node;
-  preview:boolean=false;
   dialog?:Dialog;
 
   select(node:Node){
@@ -23,9 +22,6 @@ export class AppComponent {
   perform(action:string){
     if(DialogActions[action]!=null){
       return this.dialog=DialogActions[action];
-    }
-    if(action=="preview"){
-      this.preview=!this.preview;
     }
     if(action=="close_dialog"){
       this.dialog=undefined;

@@ -1,6 +1,6 @@
-<div class="row" *ngIf="node && node.tag">
+<div class="row m-0" *ngIf="node && node.tag">
     <div class="col-12" [ngClass]="{'active-node':current!=null && node.id==current.id}">
-        <i class="material-icons mx-2 pointer align-middle" *ngIf="node.children.length>0" (click)="expand=!expand">{{expand?"expand_more":"chevron_right"}}</i>
+        <i class="material-icons mx-2 pointer align-middle" *ngIf="node.children.length>=0" (click)="expand=!expand">{{expand?"expand_more":"chevron_right"}}</i>
         <span class="pointer text-uppercase" (click)="select.emit(node)">{{node.tag}}</span>
     </div>
     <div class="col-12" style="margin-left:15px;" *ngIf="expand">

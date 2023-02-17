@@ -5,7 +5,7 @@
         <app-node *ngIf="design" [node]="design" (select)="select($event)" [current]="current"></app-node>
     </div>
     <div class="col-12 col-md-6 node">
-        <app-preview *ngIf="preview" [design]="design"></app-preview>
+        <app-preview [design]="design"></app-preview>
     </div>
 </div>
 <app-dialog [dialog]="dialog" (action)="perform($event)"></app-dialog>
