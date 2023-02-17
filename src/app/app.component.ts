@@ -1,5 +1,6 @@
 import { Component, EventEmitter } from '@angular/core';
 import { Node, NodeUtil, TAG, Form, Control } from './app.models';
+import { AppService } from './app.service';
 import { Dialog } from './dialog/dialog.component';
 
 
@@ -13,6 +14,10 @@ export class AppComponent {
   design?:Node;
   current?:Node;
   dialog?:Dialog;
+
+  constructor(public appService:AppService){
+
+  }
 
   select(node:Node){
     console.log(node);
@@ -45,6 +50,7 @@ export class AppComponent {
       this.perform("close_dialog");
     }
     console.log("Design",this.design);
+    this.appService.events.emit("preview");
     
   }
 }

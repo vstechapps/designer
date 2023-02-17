@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit } from '@angular/core';
 import { isEmptyElement, Node } from '../app.models';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-preview',
@@ -12,6 +13,12 @@ export class PreviewComponent implements OnInit, OnChanges {
   design?: Node;
 
   html: string = "";
+
+  constructor(public appService:AppService){
+    this.appService.events.subscribe((key:string)=>{
+      this.ngOnChanges();
+    });
+  }
 
   ngOnInit() {
     console.log("Rendering Preview ...")

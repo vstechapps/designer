@@ -12,6 +12,7 @@ import { PreviewComponent } from './preview/preview.component';
 import { NodeComponent } from './node/node.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { FormComponent } from './form/form.component';
+import { AppService } from './app.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { FormComponent } from './form/form.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
