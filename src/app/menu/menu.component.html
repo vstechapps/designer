@@ -1,13 +1,10 @@
 <div class="menu">
-    <div class="m-3 d-flex flex-column">
+    <div class="mx-3 d-flex flex-column">
         <div>
-            <i class="material-icons text-light pointer" (click)="close.emit(true)">close</i>
+            <i class="material-icons text-light pointer mt-4" (click)="action.emit('add')">add</i>
         </div>
         <div>
             <i class="material-icons text-light pointer mt-4" (click)="action.emit('edit')">edit</i>
-        </div>
-        <div>
-            <i class="material-icons text-light pointer mt-4" (click)="action.emit('add')">add</i>
         </div>
         <div>
             <i class="material-symbols-outlined text-light pointer mt-4" (click)="action.emit('cut')">cut</i>

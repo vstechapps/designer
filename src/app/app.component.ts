@@ -31,6 +31,9 @@ export class AppComponent {
     if(action=="close_dialog"){
       this.dialog=undefined;
     }
+    if(action=="copy"){
+      this.appService.events.emit("copy");
+    }
     if(action.indexOf("add_element_")>-1){
       let t=action.replace("add_element_","");
       if(this.current==undefined){

@@ -16,7 +16,8 @@ export class PreviewComponent implements OnInit, OnChanges {
 
   constructor(public appService:AppService){
     this.appService.events.subscribe((key:string)=>{
-      this.ngOnChanges();
+      if(key=="preview") this.ngOnChanges();
+      if(key=="copy") this.copy();
     });
   }
 
@@ -30,6 +31,10 @@ export class PreviewComponent implements OnInit, OnChanges {
     console.log("Rendering Preview ...")
     this.html = this.process(this.design);
     this.update();
+  }
+
+  copy(){
+    navigator.clipboard.writeText(this.html);
   }
 
   update(){
