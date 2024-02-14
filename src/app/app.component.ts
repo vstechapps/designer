@@ -73,6 +73,15 @@ export class AppComponent {
       console.log("Form",this.dialog?.form);
       this.perform("close_dialog");
     }
+    if(action.indexOf("add_attribute_")>-1){
+      if(this.current){
+        let k = this.dialog?.form?.controls[0].value;
+        let v = this.dialog?.form?.controls[1].value;
+        if(k && v)this.current.attributes.set(k,v);
+      }
+      console.log("Form",this.dialog?.form);
+      this.perform("close_dialog");
+    }
     console.log("Design",this.design);
     this.appService.events.emit("preview");
     
@@ -96,25 +105,28 @@ export const DialogActions:any={
     {text:"Image",action:"add_element_img"},
     {text:"Video",action:"add_element_video"}
   ]},
-  "add_text":{action:"add_text",title:"Add Text",form:{
+  "add_text":{form:{
     title:"Add Text",
     controls:[{id:"addtext",type:"text",placeholder:"Enter text here..",value:''}],
     actions:[{text:"Add",action:"add_text_"}]
   }},
-  "add_class":{action:"add_class",title:"Add Class",form:{
+  "add_class":{form:{
     title:"Add Class",
     controls:[{id:"addclass",type:"text",placeholder:"Specify class..",value:''}],
     actions:[{text:"Add",action:"add_class_"}]
   }},
-  "add_style":{action:"add_text",title:"Add Text",form:{
+  "add_style":{form:{
     title:"Add Style",
     controls:[
       {id:"addstylekey",type:"text",placeholder:"name",value:''},
       {id:"addstylevalue",type:"text",placeholder:"value",value:''}],
     actions:[{text:"Add",action:"add_style_"}]
   }},
-  "add_attribute":{action:"add_attribute",title:"Add Attribute",actions:[
-    {text:"Name",action:"add_attribute_name"},
-    {text:"Href",action:"add_attribute_href"}
-  ]}
+  "add_attribute":{form:{
+    title:"Add Attribute",
+    controls:[
+      {id:"attributeKey",type:"text",placeholder:"name",value:''},
+      {id:"attributeKey",type:"text",placeholder:"value",value:''}],
+    actions:[{text:"Add",action:"add_attribute_"}]
+  }}
 }

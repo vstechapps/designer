@@ -10,6 +10,11 @@
                 <option *ngIf="let v of control.values">{{v}}</option>
             </select>
         </div>
+        <div *ngIf="control.type=='textarea'">
+            <label [for]="control.id" class="form-label" *ngIf="control.label" >{{control.label}}</label>
+            <textarea class="form-select" [value]="control.value" rows="20">
+            </textarea>
+        </div>
     </div>
     <div>
         <button class="btn btn-primary m-2" *ngFor="let o of form.actions"
