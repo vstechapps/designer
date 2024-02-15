@@ -34,6 +34,11 @@ export class AppComponent {
     if(action=="copy"){
       this.appService.events.emit("copy");
     }
+    if(action=="delete"){
+      if(!this.design || !this.current) return;
+      NodeUtil.remove(this.design,this.current);
+      this.current=this.design;
+    }
     if(action.indexOf("add_element_")>-1){
       let t=action.replace("add_element_","");
       if(this.current==undefined){

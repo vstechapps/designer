@@ -27,7 +27,20 @@ export interface Node{
         counter += 1;
       }
       return result;
-  }
+    }
+    static remove=function(parent:Node,node:Node):boolean{
+      var p = parent;
+      var f = false
+      for(var i=0;!f && i<p.children.length;i++){
+        if(node.id==p.children[i].id){
+          p.children.splice(i,1);
+          return true;
+        }else{
+          f = NodeUtil.remove(p.children[i],node);
+        }
+      }
+      return f;
+    }
   }
   
   export enum TAG{
