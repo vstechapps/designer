@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit } from '@angular/core';
-import { isEmptyElement, Node } from '../app.models';
+import { isEmptyElement, Node, NodeUtil } from '../app.models';
 import { AppService } from '../app.service';
 
 @Component({
@@ -37,12 +37,16 @@ export class PreviewComponent implements OnInit, OnChanges {
     navigator.clipboard.writeText(this.html);
   }
 
+  
+
   update(){
     let e = document.getElementById("preview");
     if(e){
       e.innerHTML = this.html;
     }
   }
+
+  
 
   process(node?: Node): string {
     console.log("Processing ",node);
@@ -66,7 +70,6 @@ export class PreviewComponent implements OnInit, OnChanges {
         text = "<" + node.tag + attributeText + ">" + childText + "</" + node.tag + ">";
       }
     }
-    console.log(text);
     return text;
   }
 

@@ -57,7 +57,7 @@ export interface Node{
 
   
 export interface Form{
-  name:string;
+  name?:string;
   title:string;
   controls:Control[];
   actions:Action[];

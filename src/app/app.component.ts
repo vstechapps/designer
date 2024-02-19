@@ -26,7 +26,7 @@ export class AppComponent {
 
   perform(action:string){
     if(DialogActions[action]!=null){
-      return this.dialog=DialogActions[action];
+      this.dialog=DialogActions[action];
     }
     if(action=="close_dialog"){
       this.dialog=undefined;
@@ -34,11 +34,74 @@ export class AppComponent {
     if(action=="copy"){
       this.appService.events.emit("copy");
     }
+    if(action=="paste"){
+      navigator.clipboard.readText().then(text=>{
+        let d = this.appService.parseText(text);
+        if(d){
+          this.design = d;
+          this.current=this.design;
+        }
+      });
+    }
     if(action=="delete"){
       if(!this.design || !this.current) return;
-      NodeUtil.remove(this.design,this.current);
-      this.current=this.design;
+      if(this.design.id==this.current.id){
+        this.design=undefined;
+        this.current=undefined;
+      }else{
+        NodeUtil.remove(this.design,this.current);
+        this.current=this.design;
+      }
+      this.appService.events.emit("preview");
     }
+    if(action.indexOf("add")==0){
+      this.performAdd(action);
+    }
+    if(action.indexOf("edit")==0){
+      this.performEdit(action);
+    }
+  }
+
+  performEdit(action:string){
+    if(action=="edit_text"){
+      this.dialog=DialogActions['add_text'];
+      if(this.dialog?.form){
+        this.dialog.form.controls[0].value = this.current?.text || '';
+      }
+      if(this.dialog?.actions){
+        this.dialog.actions[0].text="Update";
+      }
+    }
+    if(action=="edit_style"){
+      var cstyle = this.current?.attributes.get("style");
+      cstyle = cstyle || '';
+      if(cstyle==''){
+        this.perform("add_style");
+      }else{
+        var cstyles = cstyle.split(";");
+        this.dialog={form:{title:"Edit Style",controls:[],actions:[{text:"Update",action:"edit_style_"}]}}
+        for(var i in cstyles){
+          if(cstyles[i]=="" || cstyles[i]==" ")continue;
+          var k = cstyles[i].split(":")[0];
+          var v = cstyles[i].split(":")[1];
+          this.dialog.form?.controls.push({id:'c_'+i,type:"text",label:k,value:v})
+        }
+      }
+      
+    }
+    if(action=="edit_style_"){
+      var s:string[] = [];
+      this.dialog?.form?.controls.forEach(x=>{
+        s.push(x.label+":"+x.value);
+      });
+      if(s.length>0)this.current?.attributes.set("style",s.join(";"));
+      this.perform("close_dialog");
+    }
+    this.appService.events.emit("preview");
+  }
+
+
+  performAdd(action:string){
     if(action.indexOf("add_element_")>-1){
       let t=action.replace("add_element_","");
       if(this.current==undefined){
@@ -87,9 +150,7 @@ export class AppComponent {
       console.log("Form",this.dialog?.form);
       this.perform("close_dialog");
     }
-    console.log("Design",this.design);
     this.appService.events.emit("preview");
-    
   }
 }
 
@@ -133,5 +194,11 @@ export const DialogActions:any={
       {id:"attributeKey",type:"text",placeholder:"name",value:''},
       {id:"attributeKey",type:"text",placeholder:"value",value:''}],
     actions:[{text:"Add",action:"add_attribute_"}]
-  }}
+  }},
+  "edit":{action:"edit",title:"Edit",actions:[
+    {text:"Text",action:"edit_text"},
+    {text:"Class",action:"edit_class"},
+    {text:"Style",action:"edit_style"},
+    {text:"Attribute",action:"edit_attribute"},
+  ]}
 }
