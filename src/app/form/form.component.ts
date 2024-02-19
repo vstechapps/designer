@@ -8,6 +8,8 @@ import { Control, Form } from '../app.models';
 })
 export class FormComponent {
 
+  expand:boolean=false;
+
   @Input()
   form?:Form;
   
@@ -16,7 +18,7 @@ export class FormComponent {
 
   update(c:Control,e:any) {
     c.value = e.target.value;
-    
+    this.expand=false;
   }
 
 }

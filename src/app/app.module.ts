@@ -13,6 +13,7 @@ import { NodeComponent } from './node/node.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { FormComponent } from './form/form.component';
 import { AppService } from './app.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AppService } from './app.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [AppService],
   bootstrap: [AppComponent]

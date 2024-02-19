@@ -1,5 +1,5 @@
 import { Component, EventEmitter } from '@angular/core';
-import { Node, NodeUtil, TAG, Form, Control } from './app.models';
+import { Node, NodeUtil, TAG, Form, Control, STYLES } from './app.models';
 import { AppService } from './app.service';
 import { Dialog } from './dialog/dialog.component';
 
@@ -123,7 +123,7 @@ export const DialogActions:any={
   "add_style":{form:{
     title:"Add Style",
     controls:[
-      {id:"addstylekey",type:"text",placeholder:"name",value:''},
+      {id:"addstylekey",type:"text",placeholder:"name",value:'',values:STYLES},
       {id:"addstylevalue",type:"text",placeholder:"value",value:''}],
     actions:[{text:"Add",action:"add_style_"}]
   }},
