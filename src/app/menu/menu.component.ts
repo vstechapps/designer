@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-menu',
@@ -12,6 +13,10 @@ export class MenuComponent implements OnInit{
 
   @Output()
   action:EventEmitter<string> = new EventEmitter();
+
+  constructor(public app: AppService){
+
+  }
 
   
   ngOnInit(): void {

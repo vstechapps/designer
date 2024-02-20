@@ -7,6 +7,12 @@ import { Node, NodeUtil } from './app.models';
 export class AppService {
     events: EventEmitter<string> = new EventEmitter<string>();
 
+    current?:Node;
+
+    design?:Node;
+
+    paste?:Node;
+
     parser = new DOMParser();
 
     constructor() {

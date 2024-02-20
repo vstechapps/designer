@@ -17,7 +17,7 @@ export class PreviewComponent implements OnInit, OnChanges {
   constructor(public appService:AppService){
     this.appService.events.subscribe((key:string)=>{
       if(key=="preview") this.ngOnChanges();
-      if(key=="copy") this.copy();
+      if(key=="download") this.download();
     });
   }
 
@@ -33,8 +33,8 @@ export class PreviewComponent implements OnInit, OnChanges {
     this.update();
   }
 
-  copy(){
-    navigator.clipboard.writeText(this.html);
+  download(){
+    navigator.clipboard.writeText(this.html.replaceAll("\"","\\\""));
   }
 
   

@@ -4,7 +4,7 @@
     <div class="col-12 col-md-3 node table-responsive">
         <app-node *ngIf="design" [node]="design" (select)="select($event)" [current]="current"></app-node>
     </div>
-    <div class="col-12 col-md-9 node table-responsive">
+    <div class="col-12 col-md-9 node table-responsive" (click)="deselect()">
         <app-preview [design]="design"></app-preview>
     </div>
 </div>

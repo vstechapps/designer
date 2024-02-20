@@ -15,13 +15,19 @@ export class AppComponent {
   current?:Node;
   dialog?:Dialog;
 
-  constructor(public appService:AppService){
+  constructor(public app:AppService){
 
   }
 
   select(node:Node){
     console.log(node);
     this.current = node;
+    this.app.current = node;
+  }
+  
+  deselect(){
+    this.current = undefined;
+    this.app.current = undefined;
   }
 
   perform(action:string){
@@ -31,34 +37,48 @@ export class AppComponent {
     if(action=="close_dialog"){
       this.dialog=undefined;
     }
-    if(action=="copy"){
-      this.appService.events.emit("copy");
+    if(action=="download"){
+      this.app.events.emit("download");
     }
-    if(action=="paste"){
+    if(action=="upload"){
       navigator.clipboard.readText().then(text=>{
-        let d = this.appService.parseText(text);
+        let d = this.app.parseText(text);
         if(d){
           this.design = d;
+          this.app.design = d;
           this.current=this.design;
         }
       });
     }
     if(action=="delete"){
-      if(!this.design || !this.current) return;
-      if(this.design.id==this.current.id){
-        this.design=undefined;
-        this.current=undefined;
-      }else{
-        NodeUtil.remove(this.design,this.current);
-        this.current=this.design;
-      }
-      this.appService.events.emit("preview");
+      this.dialog={form:{
+        title:"Confirm Delete?",
+        controls:[{id:"node-d",type:"textarea",value:JSON.stringify(this.current)}],
+        actions:[{text:"Yes",action:"delete_confirm"}]}};
+    }
+    if(action=="delete_confirm"){
+      this.perform("close_dialog");
+      this.performDelete();
     }
     if(action.indexOf("add")==0){
       this.performAdd(action);
     }
     if(action.indexOf("edit")==0){
       this.performEdit(action);
+    }
+    if(action=="cut"){
+      this.app.paste = this.current;
+      this.performDelete();
+    }
+    if(action=="copy"){
+      this.app.paste = JSON.parse(JSON.stringify(this.current));
+      if(this.app.paste)this.app.paste.id = NodeUtil.id(10);
+    }
+    if(action=="paste"){
+      if(this.current && this.app.paste){
+        this.current.children.push(this.app.paste);
+        this.app.events.emit("preview");
+      }
     }
   }
 
@@ -97,7 +117,7 @@ export class AppComponent {
       if(s.length>0)this.current?.attributes.set("style",s.join(";"));
       this.perform("close_dialog");
     }
-    this.appService.events.emit("preview");
+    this.app.events.emit("preview");
   }
 
 
@@ -107,6 +127,7 @@ export class AppComponent {
       if(this.current==undefined){
         this.current=NodeUtil.create(t);
         this.design=this.current;
+        this.app.design = this.design;
       }
       else{
         NodeUtil.add(this.current,t);
@@ -150,7 +171,21 @@ export class AppComponent {
       console.log("Form",this.dialog?.form);
       this.perform("close_dialog");
     }
-    this.appService.events.emit("preview");
+    this.app.events.emit("preview");
+  }
+
+  performDelete(){
+    if(!this.design || !this.current) return;
+      if(this.design.id==this.current.id){
+        this.design=undefined;
+        this.current=undefined;
+        this.app.design=undefined;
+        this.app.current=undefined;
+      }else{
+        NodeUtil.remove(this.design,this.current);
+        this.current=this.design;
+      }
+      this.app.events.emit("preview");
   }
 }
 
