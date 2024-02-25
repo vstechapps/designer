@@ -34,7 +34,8 @@ export class PreviewComponent implements OnInit, OnChanges {
   }
 
   download(){
-    navigator.clipboard.writeText(this.html.replaceAll("\"","\\\""));
+    //navigator.clipboard.writeText(this.html.replaceAll("\"","\\\""));
+    navigator.clipboard.writeText(this.html);
   }
 
   

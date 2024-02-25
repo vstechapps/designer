@@ -71,14 +71,17 @@ export class AppComponent {
       this.performDelete();
     }
     if(action=="copy"){
-      this.app.paste = JSON.parse(JSON.stringify(this.current));
-      if(this.app.paste)this.app.paste.id = NodeUtil.id(10);
+      if(this.current)
+      this.app.paste = NodeUtil.clone(this.current);
     }
     if(action=="paste"){
       if(this.current && this.app.paste){
         this.current.children.push(this.app.paste);
         this.app.events.emit("preview");
       }
+    }
+    if(action=="preview"){
+      this.app.events.emit("preview");
     }
   }
 

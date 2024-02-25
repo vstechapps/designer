@@ -41,6 +41,19 @@ export interface Node{
       }
       return f;
     }
+    static clone(node:Node):Node{
+      let c: Node;
+      if(node){
+        c = NodeUtil.create(node.tag);
+        c.attributes = node.attributes;
+        c.text = node.text;
+        for(var i in node.children){
+          c.children.push(this.clone(node.children[i]));
+        }
+        return c;
+      }
+      return node;
+    }
   }
   
   export enum TAG{
