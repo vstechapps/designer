@@ -110,14 +110,37 @@ export class AppComponent {
           this.dialog.form?.controls.push({id:'c_'+i,type:"text",label:k,value:v})
         }
       }
-      
     }
     if(action=="edit_style_"){
       var s:string[] = [];
       this.dialog?.form?.controls.forEach(x=>{
         s.push(x.label+":"+x.value);
       });
-      if(s.length>0)this.current?.attributes.set("style",s.join(";"));
+      if(s.length>0)this.current?.attributes.set("style",s.join(";")+";");
+      this.perform("close_dialog");
+    }
+    if(action=="edit_attribute"){
+      var cattr = this.current?.attributes;
+      cattr = cattr || new Map<string,string>();
+      if(cattr?.size==0){
+        this.perform("add_attribute");
+      }else{
+        this.dialog={form:{title:"Edit Attr",controls:[],actions:[{text:"Update",action:"edit_attribute_"}]}}
+        for(var i in cattr){
+          if(i=="" || cattr.get(i)== null ||cattr.get(i)=="")continue;
+          var v = cattr.get(i) || '';
+          this.dialog.form?.controls.push({id:'c_'+i,type:"text",label:i,value:v})
+        }
+      }
+    }
+    if(action=="edit_attribute_"){
+      let m = new Map<string,string>();
+      this.dialog?.form?.controls.forEach(x=>{
+        if(x.label && x.value && x.value!=""){
+          m.set(x.label,x.value);
+        }
+      });
+      if(this.current)this.current.attributes=m;
       this.perform("close_dialog");
     }
     this.app.events.emit("preview");
