@@ -60,7 +60,7 @@ export interface Node{
     DIV="div",SPAN="span",BUTTON="button",INPUT="input",IMG="img",P="p"
   }
 
-  export const STYLES=["height","width","margin","padding","border","text-align","float","position","display","color","background","font-size","font-weight"];
+  export const STYLES=["height","width","margin","padding","border","text-align","float","position","display","color","background","font-size","font-weight","text-decoration","vertical-align"];
 
   export const emptyElems = ['area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr'];
 
