@@ -114,7 +114,7 @@ export class AppComponent {
     if(action=="edit_style_"){
       var s:string[] = [];
       this.dialog?.form?.controls.forEach(x=>{
-        s.push(x.label+":"+x.value);
+        if(x.label!="" && x.value!="")s.push(x.label+":"+x.value);
       });
       if(s.length>0)this.current?.attributes.set("style",s.join(";")+";");
       this.perform("close_dialog");
@@ -162,7 +162,9 @@ export class AppComponent {
     }
     if(action.indexOf("add_text_")>-1){
       if(this.current){
-        this.current.text=this.dialog?.form?.controls[0].value;
+        let v = this.dialog?.form?.controls[0].value;
+        v = v==""? undefined : v;
+        this.current.text= v;
       }
       console.log("Form",this.dialog?.form);
       this.perform("close_dialog");
