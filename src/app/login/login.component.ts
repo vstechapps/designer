@@ -27,9 +27,6 @@ export class LoginComponent {
           console.log('Login Success, Redirecting to home');
           this.router.navigate(["home"]);
         }
-      }else{
-        console.log('Login Success, Redirecting to home');
-        this.router.navigate(["home"]);
       }
     });
   }

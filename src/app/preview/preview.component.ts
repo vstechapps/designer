@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit } from '@angular/core';
 import { isEmptyElement, Node, NodeUtil } from '../app.models';
 import { AppService } from '../app.service';
+import { collection, doc, setDoc } from 'firebase/firestore';
+import { Collections, FirestoreService } from '../firestore.service';
 
 @Component({
   selector: 'app-preview',
@@ -14,10 +16,11 @@ export class PreviewComponent implements OnInit, OnChanges {
 
   html: string = "";
 
-  constructor(public appService:AppService){
+  constructor(public appService:AppService,public firestore:FirestoreService){
     this.appService.events.subscribe((key:string)=>{
       if(key=="preview") this.ngOnChanges();
       if(key=="download") this.download();
+      if(key=="save") this.save();
     });
   }
 
@@ -46,6 +49,12 @@ export class PreviewComponent implements OnInit, OnChanges {
       e.innerHTML = this.html;
     }
   }
+
+  async save(){
+    if(this.design){
+      await setDoc(doc(collection(this.firestore.firestore,Collections.DESIGNS), this.appService.file),{design:this.html});
+    }
+}
 
   
 

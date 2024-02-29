@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Node, NodeUtil, STYLES } from '../app.models';
 import { AppService } from '../app.service';
 import { Dialog } from '../dialog/dialog.component';
+import { Collections, FirestoreService } from '../firestore.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent {
   current?:Node;
   dialog?:Dialog;
 
-  constructor(public app:AppService){
+  constructor(public app:AppService,public firestore:FirestoreService){
 
   }
 
@@ -81,6 +82,35 @@ export class HomeComponent {
     }
     if(action=="preview"){
       this.app.events.emit("preview");
+    }
+    if(action=="save_"){
+      this.app.file = this.dialog?.form?.controls[0].value;
+      if(this.app.file!=undefined && this.app.file!=""){
+        this.app.events.emit("save");
+      }
+      this.perform("close_dialog");
+    }
+    if(action=="load"){
+      this.dialog = {action:"load",title:"Load Design",actions:[]};
+      let designs = this.firestore.data[Collections.DESIGNS];
+      if(!designs)return;
+      for(var d in designs){
+        this.dialog.actions?.push({text:designs[d].id,action:"load_"+designs[d].id});
+      }
+    }
+    else if(action.indexOf("load_")==0){
+      let key = action.replace("load_","");
+      let designs = this.firestore.data[Collections.DESIGNS];
+      if(!designs){this.perform("close_dialog"); return;}
+      let d = designs.filter((k:any)=>k.id==key)[0];
+      if(!d){this.perform("close_dialog"); return;}
+      let de = this.app.parseText(d.design);
+      if(de){
+        this.design = de;
+        this.app.design = de;
+        this.current=this.design;
+      }
+      this.perform("close_dialog");
     }
   }
 
@@ -262,5 +292,11 @@ export const DialogActions:any={
     {text:"Class",action:"edit_class"},
     {text:"Style",action:"edit_style"},
     {text:"Attribute",action:"edit_attribute"},
-  ]}
+  ]},
+  "save":{form:{
+    title:"Save Design",
+    controls:[
+      {id:"design-name",type:"text",placeholder:"Name",value:''}],
+    actions:[{text:"Save",action:"save_"}]
+  }}
 }

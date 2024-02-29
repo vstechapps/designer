@@ -7,6 +7,7 @@ import { LoginGuard } from './login.guard';
 
 const routes: Routes = [
   {path:"",component:HomeComponent,canActivate:[LoginGuard]},
+  {path:"home",component:HomeComponent,canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent},
   {path:"logout",component:LogoutComponent},
 ];

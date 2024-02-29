@@ -13,6 +13,8 @@ export class AppService {
 
     paste?:Node;
 
+    file?:string;
+
     parser = new DOMParser();
 
     constructor() {
@@ -52,6 +54,8 @@ export class AppService {
         }
         return n;
     }
+
+   
 
 
 }
