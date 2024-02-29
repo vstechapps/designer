@@ -1,4 +1,3 @@
-import { makeBindingParser, TagContentType } from "@angular/compiler";
 
 export interface Node{
     id:string,
@@ -91,4 +90,19 @@ export interface Control{
 export interface Action{
   text:string;
   action:string;
+}
+
+export interface User{
+  id:string;
+  name:string;
+  email:string;
+  image?:string;
+  contact?:string;
+  role:Role
+}
+
+
+export enum Role{
+  USER="USER",
+  ADMIN="ADMIN"
 }

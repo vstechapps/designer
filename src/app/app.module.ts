@@ -14,6 +14,9 @@ import { DialogComponent } from './dialog/dialog.component';
 import { FormComponent } from './form/form.component';
 import { AppService } from './app.service';
 import { FormsModule } from '@angular/forms';
+import { LoaderComponent } from './loader/loader.component';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { FormsModule } from '@angular/forms';
     PreviewComponent,
     NodeComponent,
     DialogComponent,
-    FormComponent
+    FormComponent,
+    LoaderComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
