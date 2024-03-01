@@ -83,6 +83,17 @@ export class HomeComponent {
     if(action=="preview"){
       this.app.events.emit("preview");
     }
+    if(action=="save"){
+      this.dialog={form:{
+        title:"Save Design",
+        controls:[
+          {id:"design-name",type:"text",placeholder:"Name",value:''}],
+        actions:[{text:"Save",action:"save_"}]
+      }};
+      if(this.dialog.form && this.app.file){
+        this.dialog.form.controls[0].value = this.app.file;
+      }
+    }
     if(action=="save_"){
       this.app.file = this.dialog?.form?.controls[0].value;
       if(this.app.file!=undefined && this.app.file!=""){
@@ -292,11 +303,5 @@ export const DialogActions:any={
     {text:"Class",action:"edit_class"},
     {text:"Style",action:"edit_style"},
     {text:"Attribute",action:"edit_attribute"},
-  ]},
-  "save":{form:{
-    title:"Save Design",
-    controls:[
-      {id:"design-name",type:"text",placeholder:"Name",value:''}],
-    actions:[{text:"Save",action:"save_"}]
-  }}
+  ]}
 }

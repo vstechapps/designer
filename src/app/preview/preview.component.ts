@@ -53,8 +53,9 @@ export class PreviewComponent implements OnInit, OnChanges {
   async save(){
     if(this.design){
       await setDoc(doc(collection(this.firestore.firestore,Collections.DESIGNS), this.appService.file),{design:this.html});
+      alert("Design Saved");
     }
-}
+  }
 
   
 
