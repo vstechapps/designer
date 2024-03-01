@@ -5,7 +5,7 @@ import { Analytics, getAnalytics, logEvent } from "firebase/analytics";
 
 import { Auth, getAuth } from "firebase/auth";
 
-import { Firestore, collection, doc, getDoc, getDocs, setDoc, getFirestore, query} from "firebase/firestore";
+import { Firestore, collection, doc, getDoc, getDocs, setDoc, getFirestore, query, orderBy, limit} from "firebase/firestore";
 import { Role, User } from './app.models';
 import { LoaderService } from './loader/loader.service';
 
@@ -23,6 +23,7 @@ export class FirestoreService {
   isAdmin:boolean=false;
 
   data:any = {};
+  cursors:any = {};
 
   refreshEvent:EventEmitter<Collections> = new EventEmitter<Collections>();
   refreshUser:EventEmitter<User> = new EventEmitter<User>();
@@ -31,8 +32,15 @@ export class FirestoreService {
 
   constructor(public loader:LoaderService) {
     this.refreshUserSession();
-    this.refresh(Collections.DESIGNS);
-    
+    var collections = [Collections.DESIGNS];
+    for(var i in collections){
+      this.init(collections[i])
+      this.refresh(collections[i]);
+    } 
+  }
+
+  init(key:Collections){
+    this.cursors[key]={order:"order",limit:20};
   }
 
   refreshUserSession(){
@@ -55,8 +63,9 @@ export class FirestoreService {
   }
 
   refresh(key:Collections){
+    console.log("Refreshing "+key);
     let collect =  collection(this.firestore, key);
-    const q = query(collect);
+    const q = query(collect, limit(this.cursors[key].limit));
     getDocs(q).then(res=>{
     this.data[key] =[];
     res.forEach(doc=>
@@ -124,9 +133,6 @@ export class FirestoreService {
   
 }
 
-export enum Collections{
-  DESIGNS="designs"
-}
 
 export enum Events{
   PAGE_VIEW="PAGE_VIEW",
@@ -134,6 +140,10 @@ export enum Events{
   SIGN_UP="sign_up",
   LOGOUT="logout"
 
+}
+
+export enum Collections{
+  DESIGNS="designs"
 }
 
 const firebaseConfig = {

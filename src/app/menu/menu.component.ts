@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AppService } from '../app.service';
+import { FirestoreService } from '../firestore.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -14,12 +16,20 @@ export class MenuComponent implements OnInit{
   @Output()
   action:EventEmitter<string> = new EventEmitter();
 
-  constructor(public app: AppService){
+  constructor(public app: AppService,public firestore:FirestoreService, public router: Router){
 
   }
 
   
   ngOnInit(): void {
+  }
+
+  login(){
+    this.router.navigate(["login"]);
+  }
+
+  logout(){
+    this.router.navigate(["logout"]);
   }
 
   

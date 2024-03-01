@@ -24,14 +24,20 @@
         <div *ngIf="app.design">
             <i class="material-icons text-light pointer mt-4" (click)="action.emit('download')">download</i>
         </div>
-        <div *ngIf="!app.design">
+        <div *ngIf="firestore.user && !app.design">
             <i class="material-icons text-light pointer mt-4" (click)="action.emit('load')">folder_open</i>
         </div>
-        <div *ngIf="app.design">
+        <div *ngIf="firestore.user && app.design">
             <i class="material-icons text-light pointer mt-4" (click)="action.emit('save')">save</i>
         </div>
         <div *ngIf="app.current">
             <i class="material-icons text-danger pointer mt-4" (click)="action.emit('delete')">delete</i>
+        </div>
+        <div *ngIf="!firestore.user">
+            <i class="material-icons text-light pointer mt-4" (click)="login()">login</i>
+        </div>
+        <div *ngIf="firestore.user">
+            <i class="material-icons text-light pointer mt-4" (click)="logout()">logout</i>
         </div>
     </div>
 </div>
