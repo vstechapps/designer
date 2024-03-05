@@ -274,7 +274,7 @@ export const DialogActions:any={
     {text:"Paragraph",action:"add_element_p"},
     {text:"Image",action:"add_element_img"},
     {text:"Video",action:"add_element_video"},
-    {text:"Video",action:"add_element_script"}
+    {text:"Script",action:"add_element_script"}
   ]},
   "add_text":{form:{
     title:"Add Text",
