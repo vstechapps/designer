@@ -56,7 +56,7 @@ export interface Node{
   }
   
   export enum TAG{
-    DIV="div",SPAN="span",BUTTON="button",INPUT="input",IMG="img",P="p"
+    DIV="div",SPAN="span",BUTTON="button",INPUT="input",IMG="img",P="p",SCRIPT="script"
   }
 
   export const STYLES=["height","width","margin","padding","border","text-align","float","position","display","color","background","font-size","font-weight","text-decoration","vertical-align"];

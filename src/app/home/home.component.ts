@@ -120,6 +120,7 @@ export class HomeComponent {
         this.design = de;
         this.app.design = de;
         this.current=this.design;
+        this.app.file=key;
       }
       this.perform("close_dialog");
     }
@@ -272,7 +273,8 @@ export const DialogActions:any={
     {text:"Input",action:"add_element_input"},
     {text:"Paragraph",action:"add_element_p"},
     {text:"Image",action:"add_element_img"},
-    {text:"Video",action:"add_element_video"}
+    {text:"Video",action:"add_element_video"},
+    {text:"Video",action:"add_element_script"}
   ]},
   "add_text":{form:{
     title:"Add Text",
