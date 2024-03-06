@@ -278,7 +278,7 @@ export const DialogActions:any={
   ]},
   "add_text":{form:{
     title:"Add Text",
-    controls:[{id:"addtext",type:"text",placeholder:"Enter text here..",value:''}],
+    controls:[{id:"addtext",type:"textarea",placeholder:"Enter text here..",value:''}],
     actions:[{text:"Add",action:"add_text_"}]
   }},
   "add_class":{form:{
