@@ -184,6 +184,25 @@ export class HomeComponent {
       if(this.current)this.current.attributes=m;
       this.perform("close_dialog");
     }
+    if(action=="edit_class"){
+      let k = this.current?.attributes.get("class") || "";
+      this.dialog={form:{
+        title:"Edit Class",
+        controls:[{id:"addclass",type:"text",value:k}],
+        actions:[{text:"Update",action:"edit_class_"}]
+      }}
+    }
+    if(action=="edit_class_"){
+      if(this.current){
+        let k = this.dialog?.form?.controls[0].value;
+        if(k==null || k==""){
+          this.current.attributes.delete("class");
+        }else{
+          this.current.attributes.set("class",k);
+        }
+        this.perform("close_dialog");
+      }
+    }
     this.app.events.emit("preview");
   }
 

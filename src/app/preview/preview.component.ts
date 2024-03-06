@@ -46,7 +46,7 @@ export class PreviewComponent implements OnInit, OnChanges {
   update(){
     let e = document.getElementById("preview");
     if(e){
-      e.innerHTML = this.html;
+      e.innerHTML= this.html;
     }
   }
 
