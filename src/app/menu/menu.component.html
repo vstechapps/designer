@@ -27,6 +27,9 @@
         <div *ngIf="firestore.user && !app.design">
             <i class="material-icons text-light pointer mt-4" (click)="action.emit('load')">folder_open</i>
         </div>
+        <div *ngIf="!app.design">
+            <i class="material-icons text-light pointer mt-4" (click)="action.emit('web')">web</i>
+        </div>
         <div *ngIf="firestore.user && app.design">
             <i class="material-icons text-light pointer mt-4" (click)="action.emit('save')">save</i>
         </div>

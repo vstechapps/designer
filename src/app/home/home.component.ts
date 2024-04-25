@@ -3,6 +3,7 @@ import { Node, NodeUtil, STYLES } from '../app.models';
 import { AppService } from '../app.service';
 import { Dialog } from '../dialog/dialog.component';
 import { Collections, FirestoreService } from '../firestore.service';
+import { HttpClient } from '@angular/common/http'
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ export class HomeComponent {
   current?:Node;
   dialog?:Dialog;
 
-  constructor(public app:AppService,public firestore:FirestoreService){
+  constructor(public app:AppService,public firestore:FirestoreService,public http:HttpClient){
 
   }
 
@@ -100,6 +101,19 @@ export class HomeComponent {
         this.app.events.emit("save");
       }
       this.perform("close_dialog");
+    }
+    if(action=="web"){
+      this.dialog = {action:"web",title:"Website",
+      form:{title:"Website",controls:[{id:"web",type:"text",value:""}],actions:[{action:"web_",text:"Load"}]},
+      actions:[]};
+    }
+    if(action=="web_"){
+      let u =this.dialog?.form?.controls[0].value;
+      if(u){
+        this.http.get(u).subscribe(res=>{
+          this.performAddapp.design = this
+        });
+      }
     }
     if(action=="load"){
       this.dialog = {action:"load",title:"Load Design",actions:[]};
