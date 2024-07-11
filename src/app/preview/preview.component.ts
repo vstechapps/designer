@@ -52,7 +52,14 @@ export class PreviewComponent implements OnInit, OnChanges {
 
   async save(){
     if(this.design){
-      await setDoc(doc(collection(this.firestore.firestore,Collections.DESIGNS), this.appService.file),{design:this.html});
+      var d:Doc = {design:this.html};
+      if(this.appService.script!=null && this.appService.script!=""){
+        d.script = this.appService.script;
+      }
+      if(this.appService.style!=null  && this.appService.style!=""){
+        d.style = this.appService.style;
+      }
+      await setDoc(doc(collection(this.firestore.firestore,Collections.DESIGNS), this.appService.file),d);
       alert("Design Saved");
     }
   }
@@ -84,4 +91,10 @@ export class PreviewComponent implements OnInit, OnChanges {
     return text;
   }
 
+}
+
+export type Doc={
+  design:string;
+  script?:string;
+  style?:string;
 }

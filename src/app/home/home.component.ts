@@ -102,16 +102,38 @@ export class HomeComponent {
       }
       this.perform("close_dialog");
     }
+    if(action=="script"){
+      this.dialog = {form:{
+        title:"Script",
+        controls:[{"id":"script",type:"textarea",value:this.app.script}],
+        actions:[{action:"script_",text:"Save Script"}]
+      }};
+    }
+    if(action=="script_"){
+      this.app.script = this.dialog?.form?.controls[0].value || '';
+      this.perform("close_dialog");
+    }
+    if(action=="style"){
+      this.dialog = {form:{
+        title:"Style",
+        controls:[{"id":"style",type:"textarea",value:this.app.style}],
+        actions:[{action:"style_",text:"Save Style"}]
+      }};
+    }
+    if(action=="style_"){
+      this.app.style = this.dialog?.form?.controls[0].value || '';
+      this.perform("close_dialog");
+    }
     if(action=="web"){
-      this.dialog = {action:"web",title:"Website",
-      form:{title:"Website",controls:[{id:"web",type:"text",value:""}],actions:[{action:"web_",text:"Load"}]},
-      actions:[]};
+      this.dialog = {action:"web",
+      form:{title:"Website",controls:[{id:"web",type:"text",value:""}],actions:[{action:"web_",text:"Load"}]}
+    };
     }
     if(action=="web_"){
       let u =this.dialog?.form?.controls[0].value;
       if(u){
         this.http.get(u).subscribe(res=>{
-          this.performAddapp.design = this
+          console.log("Response from website",res);
         });
       }
     }
@@ -133,6 +155,8 @@ export class HomeComponent {
       if(de){
         this.design = de;
         this.app.design = de;
+        this.app.script = d.script;
+        this.app.style = d.style;
         this.current=this.design;
         this.app.file=key;
       }

@@ -15,6 +15,10 @@ export class AppService {
 
     file?:string;
 
+    style:string="";
+
+    script:string="";
+
     parser = new DOMParser();
 
     constructor() {
