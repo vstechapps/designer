@@ -207,9 +207,9 @@ export class HomeComponent {
         this.perform("add_attribute");
       }else{
         this.dialog={form:{title:"Edit Attr",controls:[],actions:[{text:"Update",action:"edit_attribute_"}]}}
-        for(var i in cattr){
+        for(var [i,v] of cattr){
           if(i=="" || cattr.get(i)== null ||cattr.get(i)=="")continue;
-          var v = cattr.get(i) || '';
+          v =  v || '';
           this.dialog.form?.controls.push({id:'c_'+i,type:"text",label:i,value:v})
         }
       }
