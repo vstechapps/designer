@@ -112,6 +112,7 @@ export class HomeComponent {
     if(action=="script_"){
       this.app.script = this.dialog?.form?.controls[0].value || '';
       this.perform("close_dialog");
+      this.app.events.emit("preview");
     }
     if(action=="style"){
       this.dialog = {form:{
@@ -123,6 +124,7 @@ export class HomeComponent {
     if(action=="style_"){
       this.app.style = this.dialog?.form?.controls[0].value || '';
       this.perform("close_dialog");
+      this.app.events.emit("preview");
     }
     if(action=="web"){
       this.dialog = {action:"web",

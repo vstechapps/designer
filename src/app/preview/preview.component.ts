@@ -45,8 +45,18 @@ export class PreviewComponent implements OnInit, OnChanges {
 
   update(){
     let e = document.getElementById("preview");
+    this.updateScriptStyle();
     if(e){
       e.innerHTML= this.html;
+    }
+  }
+
+  updateScriptStyle(){
+    if(this.appService.style!=null && this.appService.style!=""){
+      this.html+="<style>"+this.appService.style+"</style>";
+    }
+    if(this.appService.script!=null && this.appService.script!=""){
+      this.html+="<script>"+this.appService.script+"</script>";
     }
   }
 
